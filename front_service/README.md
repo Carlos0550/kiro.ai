@@ -1,69 +1,59 @@
-# React + TypeScript + Vite
+# Kiro.ai – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es el frontend oficial de **Kiro.ai**, un asistente personal digital diseñado para personas reales. Ofrece funcionalidades inteligentes para organizar recordatorios, finanzas personales, hábitos y modos de interacción únicos.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧠 Tecnologías utilizadas
 
-## Expanding the ESLint configuration
+* **React** + **TypeScript**
+* **Vite** como bundler
+* **Mantine** para la UI
+* **Framer Motion** para animaciones modernas
+* **TanStack Query** para manejo de datos
+* **Zod**, **Day.js**, **Axios**, **clsx**, y más (ver `package.json`)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📁 Estructura de carpetas
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+src/
+├── assets/          # Imágenes, íconos, logos, fuentes
+├── components/      # Componentes UI genéricos y reutilizables
+├── context/         # Provider global
+├── features/        # Organización por funcionalidades principales
+│   ├── auth/            # Registro, login, validaciones
+│   ├── finance/         # Gastos, ingresos, presupuestos, objetivos
+│   ├── reminders/       # Recordatorios personales y financieros
+│   ├── insights/        # Análisis automáticos e informes
+│   ├── habits/          # Registro de hábitos y motivación
+│   └── modes/           # Modo "Te tengo de la mano", etc.
+├── hooks/           # Custom hooks compartidos (useDebounce, etc.)
+├── services/        # Lógica de conexión a APIs / Axios
+├── store/           # Estado global (Zustand, Redux u otro)
+├── types/           # Tipados TypeScript compartidos
+├── utils/           # Funciones auxiliares (formato fechas, etc.)
+├── App.tsx          # Entrada principal
+├── main.tsx         # Render del React root
+└── vite-env.d.ts    # Tipos de entorno Vite
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧭 Funcionalidades principales
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+* Cambiar entre modos de uso (modo "Te tengo de la mano", "Solo lo esencial", "Coach financiero").
+* Visualizar recordatorios activos, vencidos y nuevos por agregar.
+* Cargar gastos, ingresos y metas financieras.
+* Recibir insights sobre gastos hormiga o hábitos de consumo.
+* Notificaciones internas (y eventualmente por WhatsApp).
+
+---
+
+## ✅ Cosas importantes a recordar
+
+* **Cada carpeta dentro de `features/` es un dominio funcional completo**, y puede tener su `pages/`, `components/`, `hooks/`, etc.
+* **El estado global** (ej. usuario logueado, modo seleccionado) debe ir en `store/` o `context/`.
+* **Evitá lógica duplicada**: reusá componentes de `components/` y funciones de `utils/`.
+
