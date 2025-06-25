@@ -1,0 +1,21 @@
+
+services:
+  api_gateway:
+    container_name: api_gateway_service
+    build: 
+      context: ./api_gateway_service
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  front:
+    container_name: front_service
+    build: 
+      context: ./front_service
+    
+    ports:
+      - "8000:80"
+
+    restart: unless-stopped
+    depends_on:
+      - api_gateway
