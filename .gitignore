@@ -1,8 +1,6 @@
-# Ignorar todos los entornos virtuales venv en cualquier subcarpeta
 **/venv/
 
-# Ignorar todos los archivos .env en cualquier subcarpeta
 **/.env
 
-# Ignorar todas las carpetas node_modules en cualquier subcarpeta
 **/node_modules/
+users_service/alembic/versions/*
