@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom"
 import "./App.css"
+import Auth from "./features/auth/Auth"
 function App() {
   return (
     <Routes>
       <Route path="/">
-        <Route index />
+        <Route index element={<Auth/>}/>
       </Route>
     </Routes>
   )

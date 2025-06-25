@@ -1,0 +1,1 @@
+user_already_exists = "USER_ALREADY_EXISTS"

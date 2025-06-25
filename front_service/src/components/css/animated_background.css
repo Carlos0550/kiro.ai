@@ -1,0 +1,62 @@
+/* src/styles/AnimatedBackground.css */
+
+.animated-bg-container {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+  
+  .animated-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  
+  .blob-blue {
+    width: 700px;
+    height: 400px;
+    background: radial-gradient(circle at center, #43cbff 0%, transparent 70%);
+    top: 10%;
+    left: 10%;
+    animation-name: float1;
+    animation-duration: 5s;
+  }
+  
+  .blob-purple {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle at center, #9708cc 0%, transparent 50%);
+    bottom: 10%;
+    right: 5%;
+    animation-name: float2;
+    animation-duration: 6s;
+    filter: blur(120px);
+  }
+  
+  .blob-red {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle at center, #C90202 0%, transparent 50%);
+    bottom: 10%;
+    left: 5%;
+    animation-name: float2;
+    animation-duration: 6s;
+    filter: blur(120px);
+  }
+  
+  @keyframes float1 {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    50% { transform: translateY(-40px) translateX(30px); }
+  }
+  
+  @keyframes float2 {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    50% { transform: translateY(30px) translateX(-20px); }
+  }
+  
+
+  
