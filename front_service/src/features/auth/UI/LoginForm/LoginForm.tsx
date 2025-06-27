@@ -62,19 +62,24 @@ function LoginForm({
                 </MotionDiv>
 
                 <MotionDiv
+                    initial={{opacity:0, y:50}}
+                    animate={{opacity:1, y:0}}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 300, delay: 0.5 }}
+                    transition={{ type: "spring", stiffness: 300, delay: 1 }}
                 >
                     <Button
                         fullWidth
                         variant="gradient"
                         gradient={{ from: "#43CBFF", to: "#9708CC", deg: 120 }}
                     >
-                        Registrarme
+                        Iniciar sesión
                     </Button>
                 </MotionDiv>
                 <MotionDiv
+                    initial={{opacity:0, x:-35}}
+                    animate={{opacity:1, x:0}}
+                    transition={{delay: 1.3}}
                     whileHover={{
                         x: [0, -1, 3, -1, 3, 0],
                         transition: { duration: 0.7 }

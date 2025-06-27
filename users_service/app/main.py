@@ -15,7 +15,6 @@ from .utils.logger_config import setup_logger, get_logger
 
 load_dotenv()
 
-# Configurar logging
 logger = setup_logger()
 
 @asynccontextmanager
@@ -28,18 +27,15 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-# Middleware para logging de requests
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     start_time = time.time()
     
-    # Log del request
     client_host = request.client.host if request.client else "unknown"
     logger.info(f"REQUEST: {request.method} {request.url.path} - IP: {client_host}")
     
     response = await call_next(request)
     
-    # Log del response
     process_time = time.time() - start_time
     logger.info(f"RESPONSE: {request.method} {request.url.path} - Status: {response.status_code} - Tiempo: {process_time:.3f}s")
     
@@ -48,8 +44,6 @@ async def log_requests(request: Request, call_next):
 app.include_router(user_router)
 app.add_exception_handler(
     RequestValidationError, ValidationErrorHandler)
-
-logger.info("Users Service configurado y listo")
 
 
 

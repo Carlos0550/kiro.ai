@@ -16,6 +16,8 @@ function useAuthForm() {
     user_password: ""
   })
 
+  const [registerSuccess, setRegisterSuccess] = useState<boolean>(false)
+
   const [showErrors, setShowErrors] = useState<boolean>(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,6 +31,7 @@ function useAuthForm() {
   }
 
   const errors = validateUserFields(formData)
+
   const hasErrors = Object.keys(errors).length > 0
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -48,11 +51,10 @@ function useAuthForm() {
     }
 
     setIsLoading(true)
-    console.log(formData)
     const result = await createUser(formData)
-    console.log(result)
     setIsLoading(false)
 
+    if(result) setRegisterSuccess(true)
   }
   
   return {
@@ -60,7 +62,8 @@ function useAuthForm() {
     isLoading,
     errors: showErrors ? errors : {},
     formData,
-    handleInputChange
+    handleInputChange,
+    registerSuccess
   }
 }
 

@@ -14,3 +14,7 @@ pytest-asyncio
 httpx 
 coverage
 alembic
+bcrypt
+python-jose[cryptography] 
+passlib[bcrypt] 
+

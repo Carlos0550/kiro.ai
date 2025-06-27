@@ -1,14 +1,14 @@
 import "dotenv/config"
 
 const environment = process.env.ENVIRONMENT || "development"
-
+console.log("Entorno de .env:", process.env.ENVIRONMENT)
 export const services = {
     users_service: {
-        port: 8000,
-        prodUrl: "", 
+        port: 8001,
+        prodUrl: "http://users_service:8001", 
     },
 }
-
+console.log("Entorno:", environment)
 function getServiceUrl(serviceName: any) {
     const service = services[serviceName]
 

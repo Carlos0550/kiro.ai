@@ -1,5 +1,5 @@
-import { TextInput, PasswordInput, Button, Stack, Title, Text, InputWrapper } from "@mantine/core"
-import { motion } from "framer-motion"
+import { TextInput, PasswordInput, Button, Stack, Title, Text, InputWrapper, Flex } from "@mantine/core"
+import { motion, scale } from "framer-motion"
 
 import { FaArrowLeft } from "react-icons/fa";
 import useAuthForm from "../../hooks/useAuthForm";
@@ -17,7 +17,8 @@ function RegisterForm({
         isLoading,
         errors,
         handleInputChange,
-        formData
+        formData,
+        registerSuccess
     } = useAuthForm()
     return (
         <MotionDiv
@@ -26,7 +27,8 @@ function RegisterForm({
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 1 }}
         >
-            <Stack gap="md">
+            {!registerSuccess && (
+                <Stack gap="md">
                 <MotionDiv
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -119,9 +121,11 @@ function RegisterForm({
                 </MotionDiv>
 
                 <MotionDiv
+                    initial={{opacity:0, y:50}}
+                    animate={{opacity:1, y:0}}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 300, delay: 0.5 }}
+                    transition={{ type: "spring", stiffness: 300, delay: 1 }}
                 >
                     <Button
                         onClick={onFinish}
@@ -136,6 +140,9 @@ function RegisterForm({
                     </Button>
                 </MotionDiv>
                 <MotionDiv
+                    initial={{opacity:0, x:-35}}
+                    animate={{opacity:1, x:0}}
+                    transition={{delay: 1.3}}
                     whileHover={{
                         x: [0, -1, 3, -1, 3, 0],
                         transition: { duration: 0.7 }
@@ -152,6 +159,51 @@ function RegisterForm({
                     </Button>
                 </MotionDiv>
             </Stack>
+            )}
+
+            {registerSuccess && (
+                <MotionDiv
+                    transition={{
+                        type: "spring", stiffness: 300, delay: 0.3
+                    }}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                >
+                    <Flex
+                        direction={"column"}
+                        w={"100%"}
+                    >
+                        <Title
+                            ff={"text"}
+                            style={{alignSelf: "center"}}
+                            c={"#2c2c2c"}
+                        >¡Bien hecho!</Title>
+
+                        <Text
+                            ff={"text"}
+                            c={"#2c2c2c"}
+                        >
+                            Sabrás que hacer al ingresar a tu dashboard✌ 
+                        </Text>
+
+                        <MotionDiv
+                            whileHover={{
+                                scale: 1.05,
+                                transition: { duration: 0.1 }
+                            }}
+                        >
+                            <Button
+                                mt={5}
+                                variant="gradient"
+                                fullWidth
+                                gradient={{ from: "#006C97", to: "#9708CC", deg: 460 }}
+                            >
+                                ¡Configurar Cleria ahora!
+                            </Button>
+                        </MotionDiv>
+                    </Flex>
+                </MotionDiv>   
+            )}
         </MotionDiv>
     )
 }

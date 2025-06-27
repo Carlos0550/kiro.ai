@@ -1,21 +1,64 @@
+version: "3.8"
 
 services:
   api_gateway:
     container_name: api_gateway_service
     build: 
       context: ./api_gateway_service
+    env_file:
+      - ./api_gateway_service/.env
     ports:
       - "3000:3000"
     restart: unless-stopped
+    networks:
+      - internal_net
 
   front:
     container_name: front_service
     build: 
       context: ./front_service
-    
+    env_file:
+      - ./front_service/.env
     ports:
       - "8000:80"
-
     restart: unless-stopped
     depends_on:
       - api_gateway
+    networks:
+      - internal_net
+
+  users:
+    container_name: users_service
+    build: 
+      context: ./users_service
+    env_file:
+      - ./users_service/.env
+    ports:
+      - "8001:8000" 
+    restart: on-failure
+    depends_on:
+      - postgres
+    networks:
+      - internal_net
+
+  postgres:
+    container_name: cleriai_db
+    image: postgres:16
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: cleriaai
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 35218889
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - internal_net
+
+volumes:
+  pgdata:
+
+networks:
+  internal_net:
+    driver: bridge

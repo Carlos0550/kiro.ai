@@ -1,3 +1,4 @@
+from turtle import title
 from  fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import InstanceOf
@@ -8,7 +9,7 @@ import json
 from app.connections.pg_conn import SessionLocal
 from app.constants.error_contants import user_already_exists
 from app.models.users import Users
-from app.schemas.user_schema import ErrorResponseSchema, UserPayload, UserResponseSchema
+from app.schemas.user_schema import ErrorResponseSchema, CreateUserPayload, UserResponseSchema
 from app.services.user_service import create_user
 from app.utils.logger_config import get_logger
 
@@ -27,15 +28,17 @@ def get_DB():
         db.close()
 
 @user_router.post("/new-user", 
+    summary="Registrar un nuevo usuario",
+    description="Este endpoint permite registrar un nuevo usuario con nombre, email y contraseña.",
     response_model=UserResponseSchema,
     responses={
             409: {"model": ErrorResponseSchema},
-            422: {"description": "Error de validación de entrada."},
+            422: {"model": ErrorResponseSchema},
             500: {"model": ErrorResponseSchema},
-        }
+        },
 )
-async def create_user_router(
-    data: UserPayload,
+def create_user_router(
+    data: CreateUserPayload,
     db: Session = Depends(get_DB)
 ):
 
